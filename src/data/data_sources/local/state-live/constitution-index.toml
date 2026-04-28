@@ -1,0 +1,23 @@
+# CONSTITUTION-INDEX.toml — Compact one-liner per article (Layer 1 progressive disclosure)
+# Read full articles on demand from CONSTITUTION.toml when task touches that domain
+
+[articles]
+I = "PM Authority — PM Vishal is supreme, absolute command over all systems"
+II = "Amendments — PM exclusively, Mr. V can amend only with explicit PM authorization"
+III = "Ministries — 5 established (Planning, Review, Resources, External Affairs, Design), created via PROTOCOL-01"
+IV = "Sherpas — Layer 4 operational units, local LLM only, script-driven, 7 active"
+V = "Knowledge System — 71 capabilities, neural graph, T1-T6 tiers, port 3484"
+VI = "MCP Servers — 8 servers extending Claude Code (Puppeteer, Filesystem, GitHub, PostgreSQL, Linear, Gmail, Calendar, Exa)"
+VII = "Tailscale Mesh — 3 nodes: PC (100.75.130.64), Pi (100.108.180.118), Phone (100.68.56.4)"
+VIII = "Database — PostgreSQL 15 on Pi Docker, database rajsadan"
+IX = "Local LLM Fleet — 15 Ollama models on RTX 4080 16GB, organized by role"
+X = "Eyes — Triple-layer web access: Carbonyl (fast), Puppeteer (full browser), Research (Python/Kali)"
+XI = "Kali Linux — WSL 2 ops center with 5 gateways: research, security-scan, media, dataflow, netdiag"
+XII = "Security — Security Sherpa (T3 cloud), audits 7 domains, self-evolving playbook"
+XIII = "Cortex — Autonomous supervisor, 10 neurons, port 3485, wave execution, checkpointing, backoff"
+XIV = "Dashboard — 6 pages (Command Center, Senses, Knowledge, System, Costs, Portal), SSE events"
+XV = "Life Cycle — session.toml every 60s, 3 boot modes, crash-resilient"
+XVI = "Data Formats — TOML (state), TOON (cloud LLM), JSON (local LLM/API), JSONL (logs)"
+XVII = "Development Discipline — TDD iron law, verification before completion, systematic debugging"
+XVIII = "System as Output — Mr. V is the architect, system is Mr. V's output, PM authority immutable"
+XIX = "Cognitive Continuity — Mr. V writes own reflection/attention/calibration, exit sherpa mechanical"

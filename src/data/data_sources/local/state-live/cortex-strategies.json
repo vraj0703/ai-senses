@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "lastDecay": 1774700737775,
+  "lastLSD": 1774614288622,
+  "strategies": [
+    {
+      "id": "restart-graceful",
+      "name": "Graceful Restart",
+      "description": "Kill process via PID on port, wait 1.5s, spawn fresh",
+      "contexts": [
+        "service-restart"
+      ],
+      "weight": 0.67195,
+      "successes": 4,
+      "failures": 0,
+      "lastUsed": 1774697742028
+    },
+    {
+      "id": "restart-port-cleanup",
+      "name": "Port Cleanup Restart",
+      "description": "Kill all processes on port, wait 3s for full cleanup, then spawn",
+      "contexts": [
+        "service-restart",
+        "service-restart-alt"
+      ],
+      "weight": 0.4,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "restart-delayed",
+      "name": "Delayed Restart",
+      "description": "Wait 5s for resources to free, then start with clean state",
+      "contexts": [
+        "service-restart-alt"
+      ],
+      "weight": 0.3,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "task-delegate-llm",
+      "name": "Delegate to Local LLM",
+      "description": "Use qwen2.5:14b to analyze task requirements and produce output",
+      "contexts": [
+        "task-execution"
+      ],
+      "weight": 0.5,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "task-invoke-sherpa",
+      "name": "Invoke Sherpa",
+      "description": "Delegate task to the appropriate sherpa script",
+      "contexts": [
+        "task-execution"
+      ],
+      "weight": 0.5,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "task-split",
+      "name": "Split Task",
+      "description": "Break a failed task into 2-3 smaller sub-tasks and retry each",
+      "contexts": [
+        "self-correction"
+      ],
+      "weight": 0.4,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "task-reduce-scope",
+      "name": "Reduce Scope",
+      "description": "Attempt a simpler version of the task (MVP approach)",
+      "contexts": [
+        "self-correction"
+      ],
+      "weight": 0.4,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "escalate-whatsapp",
+      "name": "Escalate via WhatsApp",
+      "description": "Send PM a detailed failure report with attempted strategies and LLM analysis",
+      "contexts": [
+        "escalation"
+      ],
+      "weight": 0.5,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    }
+  ]
+}

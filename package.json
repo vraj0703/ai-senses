@@ -1,0 +1,42 @@
+{
+  "name": "@vraj0703/ai-senses",
+  "version": "0.1.0",
+  "description": "Infrastructure-perception layer for AI agents — polls WhatsApp/cron/mobile, diagnoses services, emits sense events. Mockable defaults so it runs without any external service.",
+  "license": "MIT",
+  "author": "Vishal Raj",
+  "homepage": "https://github.com/vraj0703/ai-senses",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vraj0703/ai-senses.git"
+  },
+  "bugs": "https://linear.app/raj-sadan/project/ai-senses-extract-senses-organ-df0c73fe9718",
+  "keywords": ["ai", "agent", "perception", "senses", "infrastructure", "mcp", "whatsapp", "mobile"],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "bin": {
+    "ai-senses": "./bin/ai-senses.js"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./container": "./src/di/container.js",
+    "./constants": "./src/domain/constants/index.js"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test tests/ src/domain/use_cases/*.test.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {}
+}

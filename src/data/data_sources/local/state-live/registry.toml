@@ -1,0 +1,466 @@
+# registry.toml — Ministry and Agent Registry
+# Runtime state for Mr. V to track available capabilities within Raj Sadan.
+# Updated by Mr. V when ministries are created, suspended, or decommissioned.
+
+[meta]
+last_updated        = "2026-04-05"
+system_philosophy   = "system-as-output"
+total_agents        = 10
+total_ministries    = 5
+total_sherpas       = 7
+total_systems       = 6
+total_services      = 11
+total_protocols     = 13
+total_capabilities  = 71
+total_ollama_models = 17
+total_mcp_servers   = 10
+constitution_version = "1.2"
+constitution_articles = 19
+total_gateways      = 23
+total_libs          = 39
+total_tests         = 479
+total_dashboard_pages = 7
+cortex_neurons      = 10
+cortex_capabilities = 7
+cortex_modules      = 14
+mesh_nodes          = 3
+ci_workflows        = 3
+
+# ─────────────────────────────────────────
+# PRINCIPAL SECRETARY
+# ─────────────────────────────────────────
+
+[agents.mr-v]
+name        = "Mr. V"
+title       = "Principal Secretary"
+status      = "active"
+type        = "orchestrator"
+skill       = "N/A — operates via CLAUDE.md + AGENT.toml"
+
+# ─────────────────────────────────────────
+# MINISTRIES
+# ─────────────────────────────────────────
+
+[agents.ministry-planning]
+name        = "Ministry of Planning"
+title       = "Minister of Planning"
+status      = "active"
+type        = "ministry"
+domain      = "Strategy, architecture, roadmaps, phase planning, ecosystem evolution"
+skill       = ".claude/skills/ministry-planning/"
+created     = "2026-03-06"
+
+[agents.ministry-review]
+name        = "Ministry of Review"
+title       = "Minister of Review"
+status      = "active"
+type        = "ministry"
+domain      = "Quality assurance, deliverable review, discrepancy analysis"
+skill       = ".claude/skills/ministry-review/"
+created     = "2026-03-06"
+
+[agents.ministry-resources]
+name        = "Ministry of Resources"
+title       = "Minister of Resources"
+status      = "active"
+type        = "ministry"
+domain      = "Resource allocation, optimization, computational budgeting, token management"
+skill       = ".claude/skills/ministry-resources/"
+created     = "2026-03-06"
+
+[agents.ministry-external-affairs]
+name        = "Ministry of External Affairs"
+title       = "Minister of External Affairs"
+status      = "active"
+type        = "ministry"
+domain      = "External communications, API management, internet topology, outbound data streams"
+skill       = ".claude/skills/ministry-external-affairs/"
+created     = "2026-03-06"
+
+[agents.ministry-design]
+name        = "Ministry of Design"
+title       = "Minister of Design"
+status      = "active"
+type        = "ministry"
+domain      = "UI/UX design systems, visual language, component libraries, design tokens, design-to-code pipeline"
+skill       = ".claude/skills/ministry-design/"
+created     = "2026-03-07"
+
+# ─────────────────────────────────────────
+# SHERPAS
+# ─────────────────────────────────────────
+
+[sherpas.boot]
+name        = "Boot Sherpa"
+status      = "active"
+type        = "sherpa"
+purpose     = "System initialization — starts Ollama, services, builds cloud LLM prompt, hands over control"
+sherpa      = "sherpa/boot/"
+model       = "llama3.2:3b"
+invoked_by  = ["residents", "pm"]
+created     = "2026-03-09"
+
+[sherpas.exit]
+name        = "Exit Sherpa"
+status      = "active"
+type        = "sherpa"
+purpose     = "Graceful shutdown — save session memory, send notifications, stop all services"
+sherpa      = "sherpa/exit/"
+model       = "llama3.2:3b"
+invoked_by  = ["residents", "pm", "mr-v"]
+created     = "2026-03-10"
+
+[sherpas.scrum]
+name        = "Scrum Sherpa"
+status      = "active"
+type        = "sherpa"
+purpose     = "Plan evaluation — reads plans, evaluates dependencies, generates scrum board, sends WhatsApp alerts"
+sherpa      = "sherpa/scrum/"
+model       = "llama3.2:3b"
+invoked_by  = ["pm", "mr-v", "cron"]
+created     = "2026-03-10"
+
+[sherpas.design]
+name        = "Design Sherpa"
+status      = "active"
+type        = "sherpa"
+purpose     = "Accept design requests, provide design guidance and production-ready code, serve indexed component reference"
+sherpa      = "sherpa/design/"
+model       = "qwen2.5-coder:7b"
+invoked_by  = ["pm", "mr-v", "ministers", "sherpas"]
+created     = "2026-03-14"
+
+[sherpas.nextcloud]
+name        = "NextCloud Sherpa"
+status      = "active"
+type        = "sherpa"
+purpose     = "CRUD operations on NextCloud — file operations, state management, domain data storage and retrieval. Supports structured --op and natural language --prompt invocation."
+sherpa      = "sherpa/nextcloud/"
+model       = "qwen2.5-coder:7b"
+gateway     = "gateway/nextcloud.cjs"
+api_host    = "http://192.168.1.100:3481"
+invoked_by  = ["pm", "mr-v", "ministers", "sherpas"]
+created     = "2026-03-14"
+
+[sherpas.crawler]
+name        = "Crawler Sherpa"
+status      = "active"
+type        = "sherpa"
+purpose     = "Discovers new APIs, tools, and services from curated web sources (public-apis, free-for-dev, Exa). Classifies via local LLM and imports into Knowledge Service."
+sherpa      = "sherpa/crawler/"
+model       = "qwen2.5-coder:7b"
+invoked_by  = ["pm", "mr-v", "cron"]
+created     = "2026-03-24"
+
+[sherpas.security]
+name        = "Security Sherpa"
+status      = "active"
+type        = "sherpa"
+purpose     = "Self-evolving system security — audits secrets, network, dependencies, code, infrastructure, data protection. Defines own goals, generates and evolves own playbook. The ONLY cloud-powered sherpa (T3, Claude Sonnet)."
+sherpa      = "sherpa/security/"
+model       = "claude-sonnet-4-6"
+model_fallback = "qwen2.5:14b"
+tier        = "T3"
+protocol    = "protocols/PROTOCOL-08.toml"
+invoked_by  = ["pm", "mr-v", "cron"]
+created     = "2026-03-26"
+
+# ─────────────────────────────────────────
+# SERVICES
+# ─────────────────────────────────────────
+
+[services.whatsapp]
+name        = "WhatsApp Messaging Service"
+status      = "active"
+type        = "service"
+purpose     = "Bidirectional WhatsApp channel via Baileys — notifications, reports, resident commands"
+service     = "services/whatsapp/"
+gateway     = "gateway/whatsapp.js"
+config      = "services/whatsapp/config.toml"
+port        = 3478
+ownership   = "Ministry of External Affairs"
+created     = "2026-03-09"
+
+[services.pi]
+name        = "Raspberry Pi Cloud Node"
+status      = "active"
+type        = "service"
+purpose     = "SSH-connected Pi 5 running NextCloud on Docker — persistent data storage for Raj Sadan"
+service     = "services/pi/"
+gateway     = "gateway/pi.js"
+config      = "services/pi/config.toml"
+ownership   = "Ministry of External Affairs"
+created     = "2026-03-09"
+
+[services.senses]
+name        = "Senses Service"
+status      = "active"
+type        = "service"
+purpose     = "Mr. V's sensory nervous system — collects inputs from all interfaces (WhatsApp, Dashboard, CLI), handles routine via local LLM (T1/T2), escalates executive tasks to Mr. V's terminal (T3). Two-way bridge between terminal and the outside world."
+service     = "services/brain/"
+gateway     = "gateway/senses.cjs"
+port        = 3483
+model_local = "qwen2.5:14b (T2: conversational)"
+model_terminal = "Claude Opus (T3: executive, via active terminal)"
+interfaces  = ["whatsapp", "cli", "dashboard"]
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-17"
+upgraded    = "2026-03-18"
+
+[services.cron]
+name        = "Cron Job Service"
+status      = "active"
+type        = "service"
+purpose     = "Scheduled task runner — heartbeats, summaries, backups, reports via local LLM"
+service     = "services/cron/"
+gateway     = "gateway/cron.js"
+config      = "services/cron/config.toml"
+port        = 3479
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-09"
+
+[services.knowledge]
+name        = "Knowledge Service"
+status      = "active"
+type        = "service"
+purpose     = "Mr. V's capability registry — 59 curated tools with adapters, consumer mapping, LLM-powered recommendations, direct API invocation"
+service     = "services/knowledge/"
+gateway     = "gateway/knowledge.cjs"
+config      = "services/knowledge/config.toml"
+port        = 3484
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-23"
+
+[services.cortex]
+name        = "Cortex Autonomous Supervisor"
+status      = "active"
+type        = "service"
+purpose     = "Always-on autonomous supervisor — 10 neurons across all services: watchdog, cron webhook, Knowledge recommend/co-activate, WhatsApp commands, Focus scoring, checkpoint, T3 auto-respond, plan executor, cascade awareness, dashboard SSE"
+neurons     = 10
+service     = "services/cortex/"
+gateway     = "gateway/cortex.cjs"
+config      = "services/cortex/config.toml"
+port        = 3485
+protocol    = "protocols/PROTOCOL-09.toml"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-27"
+
+[services.dashboard]
+name        = "Dashboard"
+status      = "active"
+type        = "service"
+purpose     = "Web dashboard — 6 pages: index, services, ministers, chat, notifications, knowledge. Proxies to all services. SSE from Cortex."
+service     = "services/dashboard/"
+port        = 3482
+protocol    = "protocols/PROTOCOL-10.toml"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-24"
+
+[services.content-engine]
+name        = "Content Engine"
+status      = "purged"
+type        = "service"
+purpose     = "Automated content factory — purged 2026-03-28, config/credentials/auth retained for rebuild. YouTube pipeline (3 channels), digital products."
+service     = "services/content-engine/"
+port        = 3480
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-11"
+purged      = "2026-03-28"
+
+[services.mobile-agent]
+name        = "Mobile Agent"
+status      = "active"
+type        = "service"
+purpose     = "ROG Phone II agent — camera, TTS, vibrate, SMS, battery guardian, heartbeat to Cortex. Deployed via SCP."
+service     = "services/mobile-agent/"
+port        = 3490
+deployed_on = "ROG Phone II via Tailscale (100.68.56.4)"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-27"
+
+# ─────────────────────────────────────────
+# SYSTEMS
+# ─────────────────────────────────────────
+
+[systems.memory]
+name        = "Memory System"
+status      = "active"
+type        = "system"
+purpose     = "Persistent cross-session context — local LLM summarizes memory files during boot"
+location    = "memory/"
+index       = "memory/MEMORY.toml"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-09"
+
+[systems.nextcloud]
+name        = "NextCloud API Service"
+status      = "active"
+type        = "system"
+purpose     = "Central data store — WebDAV wrapper with REST API and versioned state management. Always-on via systemd on Pi."
+service     = "services/nextcloud/"
+gateway     = "gateway/nextcloud.cjs"
+sherpa      = "sherpa/nextcloud/"
+host        = "192.168.1.100"
+port        = 3481
+url         = "http://192.168.1.100:3481"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-14"
+deployed_on = "Raspberry Pi 5 — systemd service nextcloud-api"
+
+[systems.carbonyl]
+name        = "Carbonyl Browser"
+status      = "active"
+type        = "system"
+purpose     = "Headless Chromium terminal browser via Kali Linux WSL 2 — fetch, extract, and render web content programmatically"
+gateway     = "gateway/carbonyl.cjs"
+wsl_distro  = "kali-linux"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-26"
+
+[systems.focus]
+name        = "PM Focus System"
+status      = "active"
+type        = "system"
+purpose     = "Attention management — priority scoring across all plans, daily WhatsApp morning brief, PM reply handling (done/skip/later/focus/unpin), state persistence on NextCloud"
+service     = "services/focus/"
+cron_job    = "pm-morning-brief (0 8 * * * IST)"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-19"
+
+[systems.secrets]
+name        = "Encrypted Secrets"
+status      = "active"
+type        = "system"
+purpose     = "AES-256-GCM encryption for credentials — password-derived master key at boot, zero plaintext on disk"
+library     = "lib/secrets.cjs"
+migration   = "tools/encrypt-credentials.cjs"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-30"
+
+[systems.portainer]
+name        = "Portainer CE"
+status      = "pending_deploy"
+type        = "system"
+purpose     = "Docker container management UI on Pi — web dashboard for container visibility, logs, resource monitoring"
+url         = "http://100.108.180.118:9000"
+deploy_via  = "tools/deploy-portainer.sh"
+deployed_on = "Raspberry Pi 5"
+ownership   = "Mr. V (Principal Secretary)"
+created     = "2026-03-30"
+
+# ─────────────────────────────────────────
+# LIBRARIES (lib/)
+# ─────────────────────────────────────────
+
+[libs.validate]
+name        = "Validation + Security"
+purpose     = "Schema validation, path traversal prevention, prompt injection detection, shell sanitization"
+file        = "lib/validate.cjs"
+tests       = 34
+created     = "2026-03-28"
+updated     = "2026-03-30"
+
+[libs.checkpoint]
+name        = "Task Checkpointing"
+purpose     = "Mid-task state serialization to TOML — survives Cortex crashes, auto-resume"
+file        = "lib/checkpoint.cjs"
+tests       = 5
+created     = "2026-03-30"
+
+[libs.wave-planner]
+name        = "Wave-Based Parallel Execution"
+purpose     = "Topological sort of plan tasks into parallel waves for Cortex N8"
+file        = "lib/wave-planner.cjs"
+tests       = 8
+created     = "2026-03-30"
+
+[libs.retry]
+name        = "Exponential Backoff"
+purpose     = "Retry policy with jitter for Cortex N1 watchdog service recovery"
+file        = "lib/retry.cjs"
+tests       = 10
+created     = "2026-03-30"
+
+[libs.cost-tracker]
+name        = "LLM Cost Tracker"
+purpose     = "Token usage logging (JSONL) + aggregation by model, service, and time period"
+file        = "lib/cost-tracker.cjs"
+tests       = 11
+created     = "2026-03-30"
+
+[libs.secrets]
+name        = "Encrypted Secrets"
+purpose     = "AES-256-GCM encryption with PBKDF2 key derivation — password at boot, zero plaintext"
+file        = "lib/secrets.cjs"
+tests       = 14
+created     = "2026-03-30"
+
+[libs.redact]
+name        = "PII Redaction"
+purpose     = "Sanitize emails, phones, IPs, paths, API keys, JWTs from log output"
+file        = "lib/redact.cjs"
+tests       = 27
+created     = "2026-03-30"
+
+[libs.logger]
+name        = "Unified Smart Logger"
+purpose     = "Structured JSONL logging with PII redaction, rotation, colored console, child contexts"
+file        = "lib/logger.cjs"
+tests       = 11
+created     = "2026-03-30"
+
+[libs.model-router]
+name        = "Smart Model Router"
+purpose     = "3-tier cost-aware routing: Ollama(free) → Gemini/Haiku(cheap) → Sonnet/Opus(premium). Classifies complexity, checks availability, logs decisions."
+file        = "lib/model-router.cjs"
+tests       = 26
+created     = "2026-04-05"
+inspired_by = "Ruflo 3-tier routing pattern"
+
+[libs.quality-score]
+name        = "Quality Score Gate"
+purpose     = "0.0-1.0 deliverable scoring for PROTOCOL-00: test rate, docs, lint, debt. Gate function blocks releases below threshold."
+file        = "lib/quality-score.cjs"
+tests       = 13
+created     = "2026-04-05"
+inspired_by = "Ruflo verification-quality pattern"
+
+[libs.circuit-breaker]
+name        = "Circuit Breaker"
+purpose     = "3-state gateway resilience (closed→open→half-open). Prevents hammering failing services. Auto-recovers after cooldown."
+file        = "lib/circuit-breaker.cjs"
+tests       = 24
+created     = "2026-04-05"
+inspired_by = "claude-octopus resilience.sh pattern"
+
+[libs.compaction]
+name        = "Context Compaction"
+purpose     = "Sliding window + summary for long conversations. Prevents context overflow in Cortex, WhatsApp, agents."
+file        = "lib/compaction.cjs"
+tests       = 16
+created     = "2026-04-05"
+inspired_by = "pi-mono pi-coding-agent + pi-mom compaction patterns"
+
+# ─────────────────────────────────────────
+# CI/CD
+# ─────────────────────────────────────────
+
+[cicd.ci]
+name        = "CI Pipeline"
+purpose     = "npm test on push/PR to main"
+file        = ".github/workflows/ci.yml"
+created     = "2026-03-30"
+
+[cicd.auto-fix]
+name        = "Claude CI Auto-Fix"
+purpose     = "Claude diagnoses CI failures and pushes fix PRs"
+file        = ".github/workflows/ci-auto-fix.yml"
+requires    = "ANTHROPIC_API_KEY GitHub secret"
+created     = "2026-03-30"
+
+[cicd.pr-review]
+name        = "Claude PR Review"
+purpose     = "Automated PR review with Raj Sadan-specific rules (credentials, TOML, TDD)"
+file        = ".github/workflows/pr-review.yml"
+requires    = "ANTHROPIC_API_KEY GitHub secret"
+created     = "2026-03-30"

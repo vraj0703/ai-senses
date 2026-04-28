@@ -1,0 +1,12 @@
+node_modules/
+*.log
+.DS_Store
+.idea/
+.vscode/
+coverage/
+dist/
+.npmrc
+nociception/logs/
+interoception/state/
+src/nociception/logs/
+src/interoception/state/

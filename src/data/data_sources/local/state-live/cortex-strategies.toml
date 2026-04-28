@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "lastDecay": 1775970696619,
+  "lastLSD": 1775970894664,
+  "strategies": [
+    {
+      "id": "restart-graceful",
+      "name": "Graceful Restart",
+      "description": "Kill process via PID on port, wait 1.5s, spawn fresh",
+      "contexts": [
+        "service-restart"
+      ],
+      "weight": 0.05,
+      "successes": 7,
+      "failures": 23,
+      "lastUsed": 1775711680216
+    },
+    {
+      "id": "restart-port-cleanup",
+      "name": "Port Cleanup Restart",
+      "description": "Kill all processes on port, wait 3s for full cleanup, then spawn",
+      "contexts": [
+        "service-restart",
+        "service-restart-alt"
+      ],
+      "weight": 0.05,
+      "successes": 0,
+      "failures": 18,
+      "lastUsed": 1775711751817
+    },
+    {
+      "id": "restart-delayed",
+      "name": "Delayed Restart",
+      "description": "Wait 5s for resources to free, then start with clean state",
+      "contexts": [
+        "service-restart-alt"
+      ],
+      "weight": 0.05,
+      "successes": 0,
+      "failures": 5,
+      "lastUsed": 1775312417469
+    },
+    {
+      "id": "task-delegate-llm",
+      "name": "Delegate to Local LLM",
+      "description": "Use qwen2.5:14b to analyze task requirements and produce output",
+      "contexts": [
+        "task-execution"
+      ],
+      "weight": 0.5,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "task-invoke-sherpa",
+      "name": "Invoke Sherpa",
+      "description": "Delegate task to the appropriate sherpa script",
+      "contexts": [
+        "task-execution"
+      ],
+      "weight": 0.5,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "task-split",
+      "name": "Split Task",
+      "description": "Break a failed task into 2-3 smaller sub-tasks and retry each",
+      "contexts": [
+        "self-correction"
+      ],
+      "weight": 0.4,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "task-reduce-scope",
+      "name": "Reduce Scope",
+      "description": "Attempt a simpler version of the task (MVP approach)",
+      "contexts": [
+        "self-correction"
+      ],
+      "weight": 0.4,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "escalate-whatsapp",
+      "name": "Escalate via WhatsApp",
+      "description": "Send PM a detailed failure report with attempted strategies and LLM analysis",
+      "contexts": [
+        "escalation"
+      ],
+      "weight": 0.5,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "strategy-retry-with-backoff",
+      "name": "Retry with Backoff Strategy",
+      "description": "Implement an exponential backoff strategy for retrying failed tasks to reduce the likelihood of overwhelming system resources or encountering transient issues.",
+      "contexts": [
+        "task-execution",
+        "self-correction"
+      ],
+      "weight": 0.3,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "strategy-human-in-the-loop-fallback",
+      "name": "Human in the Loop Fallback",
+      "description": "For tasks that have failed due to decision-making requirements, implement a fallback mechanism to alert designated human operators for intervention and approval.",
+      "contexts": [
+        "task-execution",
+        "escalation"
+      ],
+      "weight": 0.3,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "resource-aware-task-queuing",
+      "name": "Resource-Aware Task Queuing",
+      "description": "Automatically defer or throttle task execution waves when VRAM or RAM thresholds exceed safety limits to prevent system instability and LLM failures.",
+      "contexts": [
+        "task-execution",
+        "self-correction"
+      ],
+      "weight": 0.3,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    },
+    {
+      "id": "llm-prompt-refinement-retry",
+      "name": "LLM Prompt Refinement Retry",
+      "description": "When an LLM returns an empty response, trigger a secondary execution attempt with an expanded context window or alternative prompting template to bypass output filtering/stalling.",
+      "contexts": [
+        "task-execution",
+        "self-correction"
+      ],
+      "weight": 0.3,
+      "successes": 0,
+      "failures": 0,
+      "lastUsed": null
+    }
+  ]
+}
