@@ -4,6 +4,7 @@
  *
  * Subcommands:
  *   serve      — start the HTTP perception loop (default)
+ *   mcp        — start the MCP server on stdio (for Claude Code/Cursor/Codex)
  *   diagnose   — one-shot service diagnosis (port + process)
  *   capture    — fetch one round of signals + print to stdout
  *   --version
@@ -21,6 +22,7 @@ ai-senses — infrastructure-perception layer.
 
 usage:
   ai-senses [serve]                 start the HTTP perception loop
+  ai-senses mcp                     start the MCP server on stdio
   ai-senses diagnose <name> <port>  one-shot diagnosis (default: stub)
   ai-senses capture                 fetch one round of signals
   ai-senses --version | --help
@@ -65,6 +67,18 @@ env:
       signals.push(...batch);
     }
     console.log(JSON.stringify(signals, null, 2));
+    return;
+  }
+  if (cmd === "mcp") {
+    const { createContainer } = require("../src/di/container.js");
+    const { createMcpServer, startStdio } = require("../src/presentation/mcp/server.js");
+    const pkg = require("../package.json");
+    const c = createContainer({ projectRoot: process.cwd() });
+    const server = createMcpServer({
+      container: c,
+      info: { name: pkg.name, version: pkg.version },
+    });
+    await startStdio(server);
     return;
   }
   console.error(`unknown command: ${cmd}`);
