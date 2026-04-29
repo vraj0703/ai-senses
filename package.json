@@ -1,6 +1,10 @@
 {
-  "name": "@vraj0703/ai-senses",
-  "version": "0.1.0",
+  "name": "@raj-sadan/ai-senses",
+  "version": "0.1.1",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "description": "Infrastructure-perception layer for AI agents — polls WhatsApp/cron/mobile, diagnoses services, emits sense events. Mockable defaults so it runs without any external service.",
   "license": "MIT",
   "author": "Vishal Raj",
@@ -33,7 +37,7 @@
   ],
   "scripts": {
     "start": "node src/index.js",
-    "test": "node --test tests/ src/domain/use_cases/*.test.js"
+    "test": "node --test tests/*.test.js src/domain/use_cases/*.test.js"
   },
   "dependencies": {
     "express": "^5.1.0"
